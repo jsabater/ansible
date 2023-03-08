@@ -1,0 +1,28 @@
+DOCUMENTATION:
+  name: sitemapxml2dict
+  version_added: '2.14'
+  short_description: ConvertXML sitemap into a list of dicts
+  description:
+    - Converts a sitemap in XML format into an equivalent list of dictionaries.
+    - When parsing the XML document, iterates over every `url` node and extracts the text in the `loc`, `priority`, `lastmod` and `changefreq` tags.
+  notes:
+    - This filter checks that the data contained inside each `url` is valid.
+  options:
+    _input:
+      description: A sitemap in XML format.
+      type: string
+      required: true
+    _validate:
+      description: Validate the contents of the XML tags?
+      type: bool
+      default: false
+      required: false
+EXAMPLES: |
+  # variable from string variable containing a sitemap document in XML format
+  {{ sitemap | sitemapxml2dict }}
+
+RETURN:
+  _value:
+    description: The variable resulting from transforming the XML document into a list of dictionaries.
+    type: list
+    elements: dict
